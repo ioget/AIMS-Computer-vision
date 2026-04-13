@@ -1,0 +1,27 @@
+# Virtual environment
+venv/
+
+# Dataset (stays on Kaggle)
+data/
+
+# Trained model weights
+*.pth
+*.keras
+*.h5
+
+# Training output plots
+*.png
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Mac / IDE
+.DS_Store
+__MACOSX/
+.idea/
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
