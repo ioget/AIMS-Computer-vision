@@ -37,7 +37,7 @@ def run_pytorch(args):
     model = CNN1(num_classes=6).to(device)
 
     if args.mode == 'eval':
-        model.load_state_dict(torch.load("rosly_model.pth", map_location=device))
+        model.load_state_dict(torch.load("rosly_mamekem_model.pth", map_location=device))
         print("Loaded weights from rosly_model.pth")
 
     trainer = Trainer(model, train_loader, test_loader,
@@ -60,7 +60,7 @@ def run_tensorflow(args):
 
     if args.mode == 'eval':
         import tensorflow as tf
-        model = tf.keras.models.load_model("rosly_model.keras")
+        model = tf.keras.models.load_model("rosly_mamekem_model.keras")
         print("Loaded model from rosly_model.keras")
 
     trainer = TFTrainer(model, train_gen, test_gen, args.lr, args.epochs)

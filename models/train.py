@@ -58,8 +58,8 @@ class Trainer:
             self.train_acc.append(average_accuracy)
             self.train_loss.append(average_loss)
         if save:
-            torch.save(self.model.state_dict(), "rosly_model.pth")
-            print("Model saved → rosly_model.pth")
+            torch.save(self.model.state_dict(), "rosly_mamekem_model.pth")
+            print("Model saved → rosly_mamekem_model.pth")
         if plot:
             self.plot_training_history()
 
@@ -144,8 +144,8 @@ class TFTrainer:
         )
 
         if save:
-            self.model.save('rosly_model.keras')
-            print("Model saved → rosly_model.keras")
+            self.model.save('rosly_mamekem_model.keras')
+            print("Model saved → rosly_mamekem_model.keras")
 
         if plot:
             self.plot_training_history()
