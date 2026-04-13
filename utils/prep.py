@@ -9,9 +9,16 @@ NUM_CLASSES = len(CLASSES)
 IMG_SIZE   = 150
 BATCH_SIZE = 32
 
-# Paths are relative to the mnist/ working directory
-TRAIN_DIR = os.path.join('data', 'archive', 'seg_train', 'seg_train')
-TEST_DIR  = os.path.join('data', 'archive', 'seg_test',  'seg_test')
+# Paths — auto-detect Kaggle vs local
+_KAGGLE_BASE = '/kaggle/input/datasets/puneet6060/intel-image-classification'
+_LOCAL_BASE  = os.path.join('data', 'archive')
+
+if os.path.isdir(_KAGGLE_BASE):
+    TRAIN_DIR = os.path.join(_KAGGLE_BASE, 'seg_train', 'seg_train')
+    TEST_DIR  = os.path.join(_KAGGLE_BASE, 'seg_test',  'seg_test')
+else:
+    TRAIN_DIR = os.path.join(_LOCAL_BASE, 'seg_train', 'seg_train')
+    TEST_DIR  = os.path.join(_LOCAL_BASE, 'seg_test',  'seg_test')
 
 # ImageNet mean/std for normalization (images are natural scenes → good prior)
 _MEAN = [0.485, 0.456, 0.406]
