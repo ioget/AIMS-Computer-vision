@@ -44,9 +44,15 @@ def run_pytorch(args):
                       args.lr, args.wd, args.epochs, device)
 
     if args.mode == 'train':
-        trainer.train(save=True, plot=True)
-
-    trainer.evaluate()
+        trainer.train(save=False, plot=True)   # train + plot history
+        trainer.evaluate()                      # results/ generated here
+        try:
+            torch.save(model.state_dict(), "rosly_mamekem_model.pth")
+            print("Model saved → rosly_mamekem_model.pth")
+        except Exception as e:
+            print(f"Warning: could not save model — {e}")
+    else:
+        trainer.evaluate()
 
 
 def run_tensorflow(args):
@@ -66,9 +72,15 @@ def run_tensorflow(args):
     trainer = TFTrainer(model, train_gen, test_gen, args.lr, args.epochs)
 
     if args.mode == 'train':
-        trainer.train(save=True, plot=True)
-
-    trainer.evaluate()
+        trainer.train(save=False, plot=True)   # train + plot history
+        trainer.evaluate()                      # results/ generated here
+        try:
+            model.save('rosly_mamekem_model.keras')
+            print("Model saved → rosly_mamekem_model.keras")
+        except Exception as e:
+            print(f"Warning: could not save model — {e}")
+    else:
+        trainer.evaluate()
 
 
 def main():
