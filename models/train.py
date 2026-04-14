@@ -252,10 +252,12 @@ class TFTrainer(Trainer):
     def train(self, save=False, plot=False):
         callbacks = [
             tf.keras.callbacks.ReduceLROnPlateau(
-                monitor='val_loss', factor=0.5, patience=3, verbose=1
+                monitor='val_loss', factor=0.5, patience=4,
+                min_lr=1e-6, verbose=1
             ),
             tf.keras.callbacks.EarlyStopping(
-                monitor='val_loss', patience=7, restore_best_weights=True, verbose=1
+                monitor='val_loss', patience=10,
+                restore_best_weights=True, verbose=1
             ),
         ]
 

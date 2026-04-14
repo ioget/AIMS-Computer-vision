@@ -17,7 +17,7 @@ def parse_args():
     )
     parser.add_argument('--epochs', type=int, default=20,
                         help="Number of training epochs (default: 20)")
-    parser.add_argument('--lr', type=float, default=0.001,
+    parser.add_argument('--lr', type=float, default=0.0005,
                         help="Learning rate (default: 0.001)")
     parser.add_argument('--wd', type=float, default=1e-4,
                         help="Weight decay – PyTorch only (default: 1e-4)")
