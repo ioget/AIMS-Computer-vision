@@ -1,9 +1,26 @@
 import argparse
+import os
+import random
+import numpy as np
 import torch
+import tensorflow as tf
 
 from utils.prep import get_data_pytorch, get_data_tensorflow
 from models.cnn_with_Pytorch import CNN1
 from models.train import Trainer, TFTrainer
+
+
+def set_seed(seed: int = 42):
+    random.seed(seed)
+    np.random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    tf.random.set_seed(seed)
+    # Ensure deterministic ops in PyTorch (slight perf cost)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark     = False
+    print(f"[Seed] fixed to {seed}")
 
 
 def parse_args():
@@ -29,6 +46,8 @@ def parse_args():
                         help="'train' or 'eval' (default: train)")
     parser.add_argument('--cuda', action='store_true',
                         help="Use GPU if available (PyTorch only)")
+    parser.add_argument('--seed', type=int, default=42,
+                        help="Random seed for reproducibility (default: 42)")
     return parser.parse_args()
 
 
@@ -88,6 +107,7 @@ def run_tensorflow(args):
 
 def main():
     args = parse_args()
+    set_seed(args.seed)
 
     if args.framework in ('pytorch', 'both'):
         run_pytorch(args)
